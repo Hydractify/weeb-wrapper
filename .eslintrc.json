@@ -1,0 +1,14 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "aqua",
+    "rules": {
+        "no-console": "off",
+        "no-await-in-loop": "off"
+    }
+}
