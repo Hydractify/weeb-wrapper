@@ -1,27 +1,31 @@
 {
-  "name": "weeb-api",
+  "name": "weeb.sh",
   "version": "1.0.0",
-  "description": "A wrapper for the weeb.hs API",
-  "main": "./src/index.js",
+  "description": "A simple yet useful wrapper for the weeb.sh API.",
+  "main": "index.js",
+  "dependencies": {
+    "snekfetch": "^3.6.3"
+  },
+  "devDependencies": {
+	"eslint-config-aqua": "^2.0.1",
+    "eslint": "^4.16.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "wrapper",
-    "weeb",
-    "api"
-  ],
-  "author": "TheDragonProject",
-  "license": "ISC",
-  "devDependencies": {
-    "eslint": "^4.16.0",
-    "eslint-config-aqua": "^2.0.1"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheDragonProject/weeb-api.git"
+    "url": "git+https://github.com/TheDragonProject/weeb.sh.git"
   },
-  "dependencies": {
-    "snekfetch": "^3.6.3"
-  }
+  "keywords": [
+    "weeb.sh",
+    "API",
+    "wrapper"
+  ],
+  "author": "Alexandre Cavalheiro <alexandre.cssilva@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheDragonProject/weeb.sh/issues"
+  },
+  "homepage": "https://github.com/TheDragonProject/weeb.sh#readme"
 }
