@@ -33,7 +33,7 @@ class WeebWrapper {
 	 * @param {string} endpoint Which endpoint of the api that will be requested to.
 	 * @param {Object} query The query of the request.
 	 * @param {boolean} toPost If it is a post request.
-	 * @return {Promise}
+	 * @return {Promise<Object>}
 	 */
 	async requestToAPI(endpoint = '', query = {}, toPost = false) {
 		let request = toPost
@@ -50,7 +50,7 @@ class WeebWrapper {
 	/**
 	 * @description Basic information about the API (And version control).
 	 * @static
-	 * @return {Object}
+	 * @return {Promise<Object>}
 	 */
 	static info() {
 		return this.requestToAPI();
@@ -64,7 +64,7 @@ class WeebWrapper {
 	 * @param {boolean} [options.hidden] Includes hidden images that can be received.
 	 * @param {boolean} [options.nsfw] Includes nsfw images that can be received.
 	 * @param {string} [options.filetype] If you want to receive a specific file format only.
-	 * @return {Object}
+	 * @return {Promise<Object>}
 	 */
 	random(type, { hidden, nsfw, filetype } = {}) {
 		if (!type) throw new TypeError('You must provide a type or a tag!');
@@ -75,7 +75,7 @@ class WeebWrapper {
 	/**
 	 * @description Fetch the current image tags for the weeb.sh API.
 	 * @param {boolean} [hidden] Include hidden tags when fetching.
-	 * @return {Object}
+	 * @return {Promise<Object>}
 	 */
 	tags(hidden = false) {
 		return this.requestToAPI('tags', { hidden });
@@ -84,7 +84,7 @@ class WeebWrapper {
 	/**
 	 * @description Fetch the current image types for the weeb.sh API.
 	 * @param {boolean} [hidden] Include hidden tags when fetching.
-	 * @return {Object}
+	 * @return {Promise<Object>}
 	 */
 	types(hidden = false) {
 		return this.requestToAPI('types', { hidden });
@@ -98,7 +98,7 @@ class WeebWrapper {
 	 * @param {boolean} [options.nsfw] If the image is NSFW or not.
 	 * @param {string} [options.source] The image's source (Link or Anime).
 	 * @param {string} [options.tags] The image's tags (Seperated by commas).
-	 * @return {Object}
+	 * @return {Promise<Object>}
 	 */
 	async upload(file, type, { nsfw, source, tags } = {}) {
 		if (!file) throw new Error('You must provide a file to be uploaded!');

@@ -30,7 +30,7 @@ const WeebWrapper = require('weeb-wrapper');
 ### Random
 ```js
 const wrapper = new WeebWrapper(<Token>);
-wrapper.random(<ImageType/ImageTag>, { hidden, nsfw, filetype });
+wrapper.random(<ImageType/ImageTag>, { hidden, nsfw, filetype }); // Returns Promise<Object>
 
 /**
  * You can get the ImageTypes and ImageTags using the wrapper.types(); and wrapper.tags();
@@ -47,7 +47,7 @@ wrapper.random('hug', { hidden: false, nsfw: false, filetype: 'jpeg' });
 ### Tags
 ```js
 const wrapper = new WeebWrapper(<Token>);
-wrapper.tags(hidden);
+wrapper.tags(hidden); // Returns Promise<Array<string>>
 
 /**
  * The first and only argument is optional.
@@ -63,7 +63,7 @@ wrapper.tags(false);
 ### Types
 ```js
 const wrapper = new WeebWrapper(<Token>);
-wrapper.types(hidden);
+wrapper.types(hidden); // Returns Promise<Array<string>>
 
 /**
  * The first and only argument is optional.
@@ -79,7 +79,7 @@ wrapper.types(true);
 ### Upload
 ```js
 const wrapper = new WeebWrapper(<Token>);
-wrapper.upload(<Buffer>, <ImageType/ImageTag>, { nsfw, source, tags });
+wrapper.upload(<Buffer>, <ImageType/ImageTag>, { nsfw, source, tags }); // Returns Promise<Object>
 
 /**
  * The third argument is optional.
