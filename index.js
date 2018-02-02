@@ -4,6 +4,10 @@
  */
 
 const { get, post } = require('snekfetch');
+const { readFile } = require('fs');
+const { promisify } = require('util');
+
+const readFileAsync = promisify(readFile);
 
 class WeebWrapper {
 	constructor(token) {
@@ -96,11 +100,17 @@ class WeebWrapper {
 	 * @param {string} [options.tags] The image's tags (Seperated by commas).
 	 * @return {Object}
 	 */
-	upload(file, type, { nsfw, source, tags } = {}) {
-		if (!file) throw new TypeError('You must provide a file to be uploaded!');
-		if (!type) throw new TypeError('You must provide a type to be set to the file!');
+	async upload(file, type, { nsfw, source, tags } = {}) {
+		if (!file) throw new Error('You must provide a file to be uploaded!');
+		if (!type) throw new Error('You must provide a type to be set to the file!');
 
-		return this.requestToAPI('upload', { file, type, nsfw, source, tags }, true);
+		if (typeof file === 'string') {
+			file = await readFileAsync(file);
+		}
+
+		if (file instanceof Buffer) return this.requestToAPI('upload', { file, type, nsfw, source, tags }, true);
+
+		throw new Error('The file parameter is not a Buffer or a String');
 	}
 }
 
