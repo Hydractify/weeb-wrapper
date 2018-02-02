@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"outDir": "bin",
+		"sourceMap": true,
+		"target": "esnext",
+		"lib": [
+			"esnext"
+		],
+		"rootDir": "src",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true
+	},
+	"exclude": [
+		"node_modules",
+		"bin",
+		"old"
+	]
+}
