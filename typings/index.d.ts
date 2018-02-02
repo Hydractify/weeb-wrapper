@@ -3,7 +3,7 @@ interface IWeebWrapperResponse {
 	id: string;
 	type: string;
 	baseType: string;
-	nsfw: boolean | string;
+	nsfw: boolean | 'only';
 	fileType: string;
 	mimeType: string;
 	account: string;
@@ -20,24 +20,24 @@ interface IWeebInfo {
 
 export class WeebWrapper {
 	public static readonly baseURL: string;
-	public static readonly info: Promise<IWeebInfo>;
+	public static info(): Promise<IWeebInfo>;
+
+	public constructor(token: string);
 
 	public requestToAPI(
-		query: object,
-		toPost: boolean,
 		endpoint?: string,
+		query?: object,
+		toPost?: boolean,
 	): Promise<IWeebWrapperResponse | string[]>;
-
 	public random(
 		type: string,
-		{ hidden, nsfw, filetype }: { hidden: boolean, nsfw: boolean, filetype: string},
+		options?: { hidden?: boolean, nsfw?: boolean, filetype?: string},
 	): Promise<IWeebWrapperResponse>;
-
-	public tags(hidden: boolean): Promise<string[]>;
-	public types(hidden: boolean): Promise<string[]>;
+	public tags(hidden?: boolean): Promise<string[]>;
+	public types(hidden?: boolean): Promise<string[]>;
 	public upload(
 		file: string | Buffer,
 		type: string,
-		{ nsfw, source, tags }: { nsfw: boolean, source: string, tags: string },
+		options?: { nsfw?: boolean, source?: string, tags?: string },
 	): Promise<IWeebWrapperResponse>;
 }
