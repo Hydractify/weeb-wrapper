@@ -25,12 +25,31 @@ class WeebWrapper {
 	}
 
 	/**
+	 * @description A function to receive the parsed object of the request.
+	 * @param {string} endpoint Which endpoint of the api that will be requested to.
+	 * @param {Object} query The query of the request.
+	 * @param {boolean} toPost If it is a post request.
+	 * @return {Promise}
+	 */
+	async requestToAPI(endpoint = '', query = {}, toPost = false) {
+		let request = toPost
+			? post(`${WeebWrapper.baseURL}/${endpoint}`).send(query)
+			: get(`${WeebWrapper.baseURL}/${endpoint}`).query(query);
+
+		request.set({ Authorization: this.token });
+
+		request = await request;
+
+		return JSON.parse(request.text);
+	}
+
+	/**
 	 * @description Basic information about the API (And version control).
 	 * @static
 	 * @return {Object}
 	 */
 	static info() {
-		return get(WeebWrapper.baseURL);
+		return this.requestToAPI();
 	}
 
 	/**
@@ -46,9 +65,7 @@ class WeebWrapper {
 	random(type, { hidden, nsfw, filetype } = {}) {
 		if (!type) throw new TypeError('You must provide a type or a tag!');
 
-		return get(`${WeebWrapper.baseURL}/random`)
-			.query({ hidden, nsfw, filetype })
-			.set({ Authorization: this.token });
+		return this.requestToAPI('random', { type, hidden, nsfw, filetype });
 	}
 
 	/**
@@ -57,9 +74,7 @@ class WeebWrapper {
 	 * @return {Object}
 	 */
 	tags(hidden = false) {
-		return get(`${WeebWrapper.baseURL}/tags`)
-			.query({ hidden })
-			.set({ Authorization: this.token });
+		return this.requestToAPI('tags', { hidden });
 	}
 
 	/**
@@ -68,9 +83,7 @@ class WeebWrapper {
 	 * @return {Object}
 	 */
 	types(hidden = false) {
-		return get(`${WeebWrapper.baseURL}/types`)
-			.query({ hidden })
-			.set({ Authorization: this.token });
+		return this.requestToAPI('types', { hidden });
 	}
 
 	/**
@@ -87,9 +100,7 @@ class WeebWrapper {
 		if (!file) throw new TypeError('You must provide a file to be uploaded!');
 		if (!type) throw new TypeError('You must provide a type to be set to the file!');
 
-		return post(`${WeebWrapper.baseURL}/upload`)
-			.set({ Authorization: this.token })
-			.send({ nsfw, source, tags });
+		return this.requestToAPI('upload', { file, type, nsfw, source, tags }, true);
 	}
 }
 
