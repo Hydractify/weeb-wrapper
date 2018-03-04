@@ -90,5 +90,5 @@ wrapper.upload(<Buffer>, <ImageType/ImageTag>, { nsfw, source, tags }); // Retur
  Example:
  ```js
  const wrapper = new WeebWrapper(<Token>);
- wrapper.upload('<directory>', 'hug', { true, '<URL/Anime Name>', 'cuddle,astolfo' });
+ wrapper.upload('<directory>', 'hug', { nsfw: true, source: '<URL/Anime Name>', tags: 'cuddle,astolfo' });
 ```
